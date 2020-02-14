@@ -1,0 +1,45 @@
+.loginContainer{
+    background-color: #f6f8f9;
+    border-radius: 3px;
+    box-shadow: 0 20px 30px 0 rgba(36,50,66,.14);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    padding: 32px;
+    position: relative;
+    width: 90%;
+    max-width: 676px;
+    padding-left: 112px;
+    padding-right: 112px;
+    
+}
+.login{
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 48px;
+}
+.loginContainer h3{
+    font-weight: 600;
+    text-align: center;
+}
+.inputGroup{
+margin-bottom: 24px;
+}
+.loginContainer p a{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    color: #796eff;
+    padding-left: 5px;
+
+}
+.loginContainer p a:hover{
+    border-bottom: 2px solid #635ac7;
+    color: #635ac7;
+    text-decoration: none;
+
+}
+.loginContainer p{
+    text-align: center;
+}
