@@ -43,3 +43,8 @@ margin-bottom: 24px;
 .loginContainer p{
     text-align: center;
 }
+.error{
+    color: red;
+    position: relative;
+    top: 7px;
+}
