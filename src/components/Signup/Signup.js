@@ -91,6 +91,9 @@ class SignUp extends Component {
         for (let formElementIdentifier in this.state.formControls) {
             formData[formElementIdentifier] = this.state.formControls[formElementIdentifier].value;
         }
+        const data = {
+            ...formData
+        };
         if (validateForm(this.state.errors)) {
             console.info('Valid Form');
         } else {
@@ -104,11 +107,7 @@ class SignUp extends Component {
         }
         else {
             this.setState({ errorPassword: '' });
-        }
-        const data = {
-            ...formData
-        };
-        axios.post('http://localhost:4000/signup', data)
+            axios.post('http://localhost:4000/signup', data)
             .then(response => {
                this.setState({signRes: response.data});
                console.log('data: ' + this.state.signRes);
@@ -116,6 +115,9 @@ class SignUp extends Component {
             .catch(err => {
                 console.log(err);
             });
+        }
+      
+       
     };
     loginHandler = () => {
         this.props.history.push('/login');
@@ -125,11 +127,11 @@ class SignUp extends Component {
         return (
             <div className="wrapper">
                 <div className={classes.signupContainer}>
-                    <h3>Sign up</h3>
+                    <h1>Sign up</h1>
                     <div className={classes.signup}>
                         <form action="" onSubmit={this.submitHandler} noValidate>
                             <div className={classes.inputGroup}>
-                                <label>Full Name</label>
+                                <label>Full Name<span>*</span></label>
                                 <input type="name" name="name"
                                     placeholder="Enter Full Name" noValidate
                                     value={this.state.formControls.name.value}
@@ -139,7 +141,7 @@ class SignUp extends Component {
                                     <p className={classes.error}>{errors.name}</p>}
                             </div>
                             <div className={classes.inputGroup}>
-                                <label>Email Address</label>
+                                <label>Email Address<span>*</span></label>
                                 <input type="email" name="email"
                                     placeholder="name@gmail.com" noValidate
                                     value={this.state.formControls.email.value}
@@ -149,7 +151,7 @@ class SignUp extends Component {
                                     <p className={classes.error}>{errors.email}</p>}
                             </div>
                             <div className={classes.inputGroup}>
-                                <label>Password</label>
+                                <label>Password<span>*</span></label>
                                 <input type="password" name="password"
                                     placeholder="Password" noValidate
                                     value={this.state.formControls.password.value}
@@ -159,7 +161,7 @@ class SignUp extends Component {
                                     <p className={classes.error}>{errors.password}</p>}
                             </div>
                             <div className={classes.inputGroup}>
-                                <label>Confirm Password</label>
+                                <label>Confirm Password<span>*</span></label>
                                 <input type="password" name="confirmPassword"
                                     placeholder="Confirm Password" noValidate
                                     value={this.state.formControls.confirmPassword.value}
@@ -173,7 +175,7 @@ class SignUp extends Component {
                             </div>
                             <div>
                             {<p className={classes.error}>{this.state.signRes}</p>}
-                                <input type="submit" value="Sign up" disabled={false}/>
+                                <input type="submit" value="Sign up" />
 
                             </div>
                         </form>

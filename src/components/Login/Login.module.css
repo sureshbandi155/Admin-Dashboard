@@ -5,20 +5,18 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 80px;
-    padding: 32px;
+    padding: 32px 60px;
     position: relative;
     width: 90%;
     max-width: 676px;
-    padding-left: 112px;
-    padding-right: 112px;
     
 }
 .login{
-    padding-left: 80px;
-    padding-right: 80px;
+    /* padding-left: 80px;
+    padding-right: 80px; */
     padding-top: 48px;
 }
-.loginContainer h3{
+.loginContainer h1{
     font-weight: 600;
     text-align: center;
 }

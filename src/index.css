@@ -42,17 +42,18 @@ ul{
   text-align: center;
 }
 ul li{
-  display: inline-block;
+  display: block;
   margin-bottom: 15px;
+  text-align: left;
 }
 ul li a{
   text-decoration: none;
   font-size: 18px;
   text-transform: uppercase;
 }
-ul li:not(:first-child){
+/* ul li:not(:first-child){
   margin-left: 15px;
-}
+} */
 label{
   font-size: 16px;
   display: block;
@@ -88,4 +89,27 @@ input[type="submit"]{
 input[type="submit"]:hover{
   background: #635ac7;
 
+}
+button[type="button"]{
+  height: 50px;
+  margin-bottom: 20px;
+  display: block;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px !important;
+  border-radius: 3px !important;
+}
+button[type="button"]>div{
+  display: none;
+
+}
+button[type="button"] span{
+  text-align: center;
+    margin: 0 auto;
+}
+.kep-login-facebook.metro {
+  font-size: 14px;
+  padding: 0;
+  border-radius: 0;
+  font-size: 14px;
+    font-weight: 500;
 }
