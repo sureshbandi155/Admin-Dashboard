@@ -16,7 +16,7 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
-    "homepage": "http://sureshbandi155.github.io/Admin-Dashboard"
+    "homepage": "http://sureshbandi155.github.io/dashboard"
   },
   "scripts": {
     "start": "react-scripts start",
