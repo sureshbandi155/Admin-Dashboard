@@ -41,7 +41,7 @@ class App extends Component {
         <Redirect from="/" to="/login" />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        {/* <Route exact path="/dashboard" component={Dashboard} /> */}
         <Route path="/home" component={Home} />
         <Route path="/projects" component={Projects} />
         <Route path="/time" component={Timetracker} />
