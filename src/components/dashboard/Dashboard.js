@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import './Dashboard.css';
 import Sidebar from '../Sidebar/Sidebar';
-import Home from '../Home/Home';
 
 
-const dashboard = ({ match }) => {
+const dashboard = () => {
     return (
         <div>
-            <div class="wrapper">
+            <div className="wrapper">
                 <Sidebar />
-                <div id="content">
-                  
-                </div>
             </div>
         </div>
 

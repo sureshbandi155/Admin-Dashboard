@@ -3,9 +3,10 @@ import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
 
 
-// import classes from './Settings.module.css';
 
-const settings = (props) => {
+// import classes from './Projects.module.css';
+
+const Timetracker = (props) => {
     return (
         <div>
             <div className="wrapper">
@@ -13,11 +14,11 @@ const settings = (props) => {
                 <Sidebar />
                 <div id="content">
                     <Navbar />
-                    <p>Account Settings Component.</p>
+                    <p>Timetracker/Report Component.</p>
                 </div>
             </div>
         </div>
 
     );
 }
-export default settings;
+export default Timetracker;

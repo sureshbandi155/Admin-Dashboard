@@ -89,14 +89,14 @@ class Login extends Component {
         }
         // console.log(this.state.loginUserDetails);
         // if (this.state.loginUserDetails.data === "Login successfully done.") {
-        //     this.props.history.push('/dashboard');
+        //     this.props.history.push('');
         // }
 
         axios.post('http://localhost:4000/login', data)
             .then(response => {
                 alert(response.data);
                 this.setState({ loginUserDetails: response.data });
-                this.props.history.push('/dashboard');
+                this.props.history.push('/home');
             })
             .catch(err => {
                 console.log(err);
@@ -105,26 +105,28 @@ class Login extends Component {
 
 
     };
-    
+
     redirectSignupHandler = () => {
         this.props.history.push('/signup');
     }
     responseGoogle = (response) => {
         this.setState({ google: response.profileObj, auth: true });
         console.log(response);
-        this.props.history.push('/dashboard');
+        this.props.history.push('/home');
     }
     componentClicked = () => {
         console.log('btn clicked');
     }
     responseFacebook = (response) => {
         console.log(response);
-        this.setState({fbName: response.name, 
-        picture: response.picture.data.url,
-        auth: true});
-        this.props.history.push('/dashboard');
+        this.setState({
+            fbName: response.name,
+            picture: response.picture.data.url,
+            auth: true
+        });
+        this.props.history.push('/home');
     }
-    
+
     render() {
         // console.log(this.state);
         const { errors } = this.state;
@@ -149,7 +151,8 @@ class Login extends Component {
                         <form action="" onSubmit={this.submitHandler}>
                             <div className={classes.inputGroup}>
                                 <label>Email Address</label>
-                                <input type="email" name="email"
+                                <input type="email"
+                                    name="email"
                                     placeholder="name@gmail.com"
                                     value={this.state.formControls.email.value}
                                     onChange={this.changeHandler} noValidate />
@@ -158,7 +161,8 @@ class Login extends Component {
                             </div>
                             <div className={classes.inputGroup}>
                                 <label>Password</label>
-                                <input type="password" name="password"
+                                <input type="password"
+                                    name="password"
                                     placeholder="Password"
                                     value={this.state.formControls.password.value}
                                     onChange={this.changeHandler} noValidate />

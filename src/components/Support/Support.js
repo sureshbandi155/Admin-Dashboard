@@ -3,9 +3,10 @@ import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
 
 
+
 // import classes from './Projects.module.css';
 
-const projects = (props) => {
+const support = (props) => {
     return (
         <div>
         <div className="wrapper">
@@ -13,11 +14,11 @@ const projects = (props) => {
             <Sidebar />
             <div id="content">
                 <Navbar />
-             <p>Projects Component.</p>
+             <p>Support Component.</p>
             </div>
         </div>
     </div>
 
     );
 }
-export default projects;
+export default support;

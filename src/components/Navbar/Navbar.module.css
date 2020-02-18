@@ -1,0 +1,27 @@
+.Navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.Navbar button{
+    border: 2px solid #e7e7e7;
+    background: #fff;
+    padding: 8px 46px;
+    outline: none;
+}
+.Navbar button:hover{
+    color: #796eff;
+}
+.Navbar img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.Navbar svg{
+    font-size: 26px;
+    margin-right: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+
+}

@@ -8,6 +8,11 @@ import Dashboard from './components/dashboard/Dashboard';
 import Home from './components/Home/Home';
 import Projects from './components/Projects/Projects';
 import Settings from './components/Settings/Settings';
+import Timetracker from './components/Timetracker/Timetracker';
+import Payments from './components/Payments/Payments';
+import NDA from './components/NDA/NDA';
+import Support from './components/Support/Support';
+import Refer from './components/Refer and earn/Refer';
 
 
 
@@ -37,9 +42,14 @@ class App extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route   path="/dashboard/home" component={Home} />
-        <Route   path="/dashboard/projects" component={Projects} />
-        <Route   path="/dashboard/settings" component={Settings} />
+        <Route path="/home" component={Home} />
+        <Route path="/projects" component={Projects} />
+        <Route path="/time" component={Timetracker} />
+        <Route path="/payments" component={Payments} />
+        <Route path="/nda-contract" component={NDA} />
+        <Route path="/support" component={Support} />
+        <Route path="/refer" component={Refer} />
+        <Route path="/settings" component={Settings} />
       </BrowserRouter>
 
     );
