@@ -120,7 +120,7 @@ class SignUp extends Component {
        
     };
     loginHandler = () => {
-        this.props.history.push('/login');
+        this.props.history.push('/dashboard');
     }
     render() {
         const { errors } = this.state;
