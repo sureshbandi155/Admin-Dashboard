@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "https//sureshbandi155.github.io/dashboard/static/css/main.0e1aa930.chunk.css",
-    "main.js": "https//sureshbandi155.github.io/dashboard/static/js/main.4043cbc7.chunk.js",
-    "main.js.map": "https//sureshbandi155.github.io/dashboard/static/js/main.4043cbc7.chunk.js.map",
-    "runtime-main.js": "https//sureshbandi155.github.io/dashboard/static/js/runtime-main.2f73dd8c.js",
-    "runtime-main.js.map": "https//sureshbandi155.github.io/dashboard/static/js/runtime-main.2f73dd8c.js.map",
-    "static/css/2.47e06e2e.chunk.css": "https//sureshbandi155.github.io/dashboard/static/css/2.47e06e2e.chunk.css",
-    "static/js/2.9346f18e.chunk.js": "https//sureshbandi155.github.io/dashboard/static/js/2.9346f18e.chunk.js",
-    "static/js/2.9346f18e.chunk.js.map": "https//sureshbandi155.github.io/dashboard/static/js/2.9346f18e.chunk.js.map",
-    "index.html": "https//sureshbandi155.github.io/dashboard/index.html",
-    "precache-manifest.f6dd4a0d0bb817d95faa311135842132.js": "https//sureshbandi155.github.io/dashboard/precache-manifest.f6dd4a0d0bb817d95faa311135842132.js",
-    "service-worker.js": "https//sureshbandi155.github.io/dashboard/service-worker.js",
-    "static/css/2.47e06e2e.chunk.css.map": "https//sureshbandi155.github.io/dashboard/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.0e1aa930.chunk.css.map": "https//sureshbandi155.github.io/dashboard/static/css/main.0e1aa930.chunk.css.map",
-    "static/js/2.9346f18e.chunk.js.LICENSE.txt": "https//sureshbandi155.github.io/dashboard/static/js/2.9346f18e.chunk.js.LICENSE.txt"
+    "main.css": "/dashboard/static/css/main.0e1aa930.chunk.css",
+    "main.js": "/dashboard/static/js/main.c95f8dcb.chunk.js",
+    "main.js.map": "/dashboard/static/js/main.c95f8dcb.chunk.js.map",
+    "runtime-main.js": "/dashboard/static/js/runtime-main.823d2d5c.js",
+    "runtime-main.js.map": "/dashboard/static/js/runtime-main.823d2d5c.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/dashboard/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.9346f18e.chunk.js": "/dashboard/static/js/2.9346f18e.chunk.js",
+    "static/js/2.9346f18e.chunk.js.map": "/dashboard/static/js/2.9346f18e.chunk.js.map",
+    "index.html": "/dashboard/index.html",
+    "precache-manifest.cc34d5cd98da4533388427032a7fcad9.js": "/dashboard/precache-manifest.cc34d5cd98da4533388427032a7fcad9.js",
+    "service-worker.js": "/dashboard/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/dashboard/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.0e1aa930.chunk.css.map": "/dashboard/static/css/main.0e1aa930.chunk.css.map",
+    "static/js/2.9346f18e.chunk.js.LICENSE.txt": "/dashboard/static/js/2.9346f18e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2f73dd8c.js",
+    "static/js/runtime-main.823d2d5c.js",
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.9346f18e.chunk.js",
     "static/css/main.0e1aa930.chunk.css",
-    "static/js/main.4043cbc7.chunk.js"
+    "static/js/main.c95f8dcb.chunk.js"
   ]
 }
