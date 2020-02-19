@@ -1,50 +1,42 @@
-import * as actionType from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility';
 
 const initialState = {
     token: null,
-    userId: null,
+    email: null,
     error: null,
     loading: false
-}
+};
 
 const authStart = ( state, action ) => {
-    return {
-        ...state,
-        error: null,
-        loading: true
-    }
+    return updateObject( state, { error: null, loading: true } );
 };
-const authSuccess = ( state, action ) => {
-    return {
-        ...state,
-        token: action.idToken,
-        userId: action.userId,
+
+const authSuccess = (state, action) => {
+    return updateObject( state, { 
+        // token: action.idToken,
+        // userId: action.userId,
+        email: action.email,
         error: null,
         loading: false
-    }
+     } );
 };
-const authFail = ( state, action ) => {
-    return {
-        ...state,
+
+const authFail = (state, action) => {
+    return updateObject( state, {
         error: action.error,
         loading: false
-    }
+    });
 }
-const authLogout = (state, action ) =>  {
-    return {
-        ...state,
-        token: null,
-        userId: null
-    };
-};
-const reducer = (state = initialState, action) => {
-    switch(action.type) {
-        case actionType.AUTH_START: return authStart( state, action );
-        case actionType.AUTH_SUCCESS: return authSuccess( state, action );
-        case actionType.AUTH_FAIL: return authFail(state, action);
-        case actionType.AUTH_LOGOUT: return authLogout(state, action);
+
+const reducer = ( state = initialState, action ) => {
+    switch ( action.type ) {
+        case actionTypes.AUTH_START: return authStart(state, action);
+        case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
+        case actionTypes.AUTH_FAIL: return authFail(state, action);
         default:
-        return state;
+            return state;
     }
 };
+
 export default reducer;

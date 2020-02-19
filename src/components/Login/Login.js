@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import classes from './Login.module.css';
 
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import * as actionTypes from '../../store/actions/index';
 
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -82,6 +84,8 @@ class Login extends Component {
         const data = {
             ...formData
         };
+        this.props.onAuth(this.state.formControls.email.value, this.state.formControls.password.value);
+
         if (validateForm(this.state.errors)) {
             console.info('Valid Form');
         } else {
@@ -92,16 +96,16 @@ class Login extends Component {
         //     this.props.history.push('');
         // }
 
-        axios.post('http://localhost:4000/login', data)
-            .then(response => {
-                alert(response.data);
-                this.setState({ loginUserDetails: response.data });
-                this.props.history.push('/home');
-            })
-            .catch(err => {
-                console.log(err);
-                this.props.history.push('/login');
-            });
+        // axios.post('http://localhost:4000/login', data)
+        //     .then(response => {
+        //         alert(response.data);
+        //         this.setState({ loginUserDetails: response.data });
+        //         this.props.history.push('/home');
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //         this.props.history.push('/login');
+        //     });
 
 
     };
@@ -111,7 +115,7 @@ class Login extends Component {
     }
     responseGoogle = (response) => {
         this.setState({ google: response.profileObj, auth: true });
-        console.log(response);
+        console.log(this.state.google);
         this.props.history.push('/home');
     }
     responseGoogleFailure = () => {
@@ -127,6 +131,7 @@ class Login extends Component {
             picture: response.picture.data.url,
             auth: true
         });
+        console.log(this.state.facebookLogin);
         this.props.history.push('/home');
     }
 
@@ -189,4 +194,10 @@ class Login extends Component {
         );
     }
 }
-export default Login;
+
+const mapDispatchToProps = dispatch => {
+  return{
+      onAuth: (email, password) => dispatch(actionTypes.auth(email, password))
+  };
+};
+export default connect(null, mapDispatchToProps)(Login);

@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { push } from 'redux-router';
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -6,11 +7,10 @@ export const authStart = () => {
         type: actionTypes.AUTH_START
     };
 };
-export const authSuccess = (token, userId) => {
+export const authSuccess = (email) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        idToken: token,
-        userId: userId
+        email: email
     };
 };
 export const authFail = (error) => {
@@ -19,20 +19,20 @@ export const authFail = (error) => {
         error: error
     };
 };
-export const logout = () => {
-    return {
-        type: actionTypes.AUTH_LOGOUT
-    };
-}
-export const checkAuthTimeout = (expirationTime) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logout())
-        }, expirationTime * 1000);
+// export const logout = () => {
+//     return {
+//         type: actionTypes.AUTH_LOGOUT
+//     };
+// }
+// export const checkAuthTimeout = (expirationTime) => {
+//     return dispatch => {
+//         setTimeout(() => {
+//             dispatch(logout())
+//         }, expirationTime * 1000);
 
-    }
-};
-export const auth = (email, password, isSignup) => {
+//     }
+// };
+export const auth = (email, password) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -40,19 +40,20 @@ export const auth = (email, password, isSignup) => {
             password: password,
             returnSecureToken: true
         };
-        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=\n' +
-            'AIzaSyBn875LSrphDjICQ-OWqj15GKzCRwsp8qQ';
-        if (!isSignup) {
-            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBn875LSrphDjICQ-OWqj15GKzCRwsp8qQ';
-        }
-        axios.post(url, authData)
+        // let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=\n' +
+        //     'AIzaSyBn875LSrphDjICQ-OWqj15GKzCRwsp8qQ';
+        // if (!isSignup) {
+        //     url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBn875LSrphDjICQ-OWqj15GKzCRwsp8qQ';
+        // }
+        axios.post('http://localhost:4000/login', authData)
             .then(response => {
                 console.log(response);
-                dispatch(authSuccess(response.data.idToken, response.data.localId));
-                dispatch(checkAuthTimeout(response.data.expiresIn));
+                dispatch(authSuccess(response.config.data));
+                // dispatch(push('/login'));
             })
             .catch(error => {
-                dispatch(authFail(error.response.data.error))
+                console.log(error);
+                dispatch(authFail(error))
             });
     };
 };

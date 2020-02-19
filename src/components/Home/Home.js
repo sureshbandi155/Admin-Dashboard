@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faEdit } from '@fortawesome/free-solid-svg-icons'
+// import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
 
 class Dashboard extends Component {
-    updateHandler = () => {
-        document.getElementById("table").style.display = "none";
-        document.getElementById("edit-form").style.display = "block";
-    }
+    // updateHandler = () => {
+    //     document.getElementById("table").style.display = "none";
+    //     document.getElementById("edit-form").style.display = "block";
+    // }
     render() {
         return (
             <div>
@@ -27,7 +27,7 @@ class Dashboard extends Component {
                                 <th scope="col">Due Date</th>
                                 <th scope="col">Team size</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Edit</th>
+                                {/* <th scope="col">Edit</th> */}
                                 {/* <th scope="col">Delete</th> */}
                             </tr>
                         </thead>
@@ -37,7 +37,7 @@ class Dashboard extends Component {
                                 <td>16 Aug, 2020</td>
                                 <td>4</td>
                                 <td>WIP</td>
-                                <td><a><FontAwesomeIcon icon={faEdit}/></a></td>
+                                {/* <td><a><FontAwesomeIcon icon={faEdit}/></a></td> */}
                                 {/*<td><a><FontAwesomeIcon icon={faTrash}/></a></td>*/}
 
                             </tr>
@@ -46,7 +46,7 @@ class Dashboard extends Component {
                                 <td>16 Aug, 2020</td>
                                 <td>2</td>
                                 <td>In QA</td>
-                                <td><a><FontAwesomeIcon icon={faEdit}/></a></td>
+                                {/* <td><a><FontAwesomeIcon icon={faEdit}/></a></td> */}
                                 {/* <td><a><FontAwesomeIcon icon={faTrash}/></a></td> */}
                             </tr>
                             <tr>
@@ -54,7 +54,7 @@ class Dashboard extends Component {
                                 <td>16 Aug, 2020</td>
                                 <td>2</td>
                                 <td>Ready for Review</td>
-                                <td><FontAwesomeIcon icon={faEdit}/></td>
+                                {/* <td><FontAwesomeIcon icon={faEdit}/></td> */}
                                 {/* <td><a><FontAwesomeIcon icon={faTrash}/></a></td> <a onClick={this.updateHandler}</a>*/}
                             </tr>
                         </tbody>
