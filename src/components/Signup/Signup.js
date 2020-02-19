@@ -108,19 +108,21 @@ class SignUp extends Component {
         else {
             this.setState({ errorPassword: '' });
             axios.post('http://localhost:4000/signup', data)
-            .then(response => {
-               this.setState({signRes: response.data});
-               console.log('data: ' + this.state.signRes);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+                .then(response => {
+                    this.setState({ signRes: response.data });
+                    // console.log('data: ' + this.state.signRes);
+                    // this.props.history.push('/login');
+
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
-      
-       
+
+
     };
     loginHandler = () => {
-        this.props.history.push('/dashboard');
+        this.props.history.push('/login');
     }
     render() {
         const { errors } = this.state;
@@ -174,13 +176,13 @@ class SignUp extends Component {
 
                             </div>
                             <div>
-                            {<p className={classes.error}>{this.state.signRes}</p>}
+                                {<p className={classes.error}>{this.state.signRes}</p>}
                                 <input type="submit" value="Sign up" />
 
                             </div>
                         </form>
                         <p>Click here to
-                            <a  onClick={this.loginHandler}>Login</a>
+                            <a onClick={this.loginHandler}>Login</a>
                         </p>
 
                     </div>

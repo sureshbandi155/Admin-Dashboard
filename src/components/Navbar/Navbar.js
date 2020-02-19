@@ -8,7 +8,7 @@ import classes from './Navbar.module.css';
 
 class Navbar extends Component {
     redirectHandler = () => {
-        this.props.history.push('/dashboard/home');
+        this.props.history.push('/home');
     }
     render() {
        

@@ -38,8 +38,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         {/* <Header /> */}
-        <Redirect from="/" to="/dashboard" />
-        <Route exact path="/dashboard" component={Login} />
+        <Redirect from="/" to="/login" />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         {/* <Route exact path="/dashboard" component={Dashboard} /> */}
         <Route path="/home" component={Home} />

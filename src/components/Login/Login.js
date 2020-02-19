@@ -100,7 +100,7 @@ class Login extends Component {
             })
             .catch(err => {
                 console.log(err);
-                this.props.history.push('/dashboard');
+                this.props.history.push('/login');
             });
 
 
@@ -114,8 +114,11 @@ class Login extends Component {
         console.log(response);
         this.props.history.push('/home');
     }
+    responseGoogleFailure = () => {
+        this.props.history.push('/login');
+    }
     componentClicked = () => {
-        console.log('btn clicked');
+        // console.log('btn clicked');
     }
     responseFacebook = (response) => {
         console.log(response);
@@ -140,14 +143,14 @@ class Login extends Component {
                             clientId="1002797710780-o39g3un6tukk7uk1v0p6omsjssu1u0u7.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
                             buttonText="LOGIN WITH GOOGLE"
                             onSuccess={this.responseGoogle}
-                            onFailure={this.responseGoogle}
+                            onFailure={this.responseGoogleFailure}
                         />
                         <FacebookLogin
                             appId="274007033579197"
-                            autoLoad={true}
+                            autoLoad={false}
                             fields="name,email,picture"
                             onClick={this.componentClicked}
-                            callback={this.responseFacebook} />
+                            callback={this.responseFacebook}  onFailure={this.responseGoogleFailure}/>
                         <form action="" onSubmit={this.submitHandler}>
                             <div className={classes.inputGroup}>
                                 <label>Email Address</label>
