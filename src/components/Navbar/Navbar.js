@@ -12,7 +12,7 @@ class Navbar extends Component {
         // this.props.history.push('/home');
     }
     render() {
-       
+
         return (
             <div className={classes.Navbar}>
                 <div>
@@ -22,18 +22,18 @@ class Navbar extends Component {
                     {/* <button>Start New Project</button> */}
                     <FontAwesomeIcon icon={faEnvelope} />
                     <FontAwesomeIcon icon={faBell} />
-                    <img src="https://lh5.googleusercontent.com/-gNAmwhr8Js8/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rczoDdBarOOLuz4pWizP76TNnBXDQ/s96-c/photo.jpg" alt="person"/>
-        <p>userDetalils: {this.props.userLD}</p>
+                    <img src="https://lh5.googleusercontent.com/-gNAmwhr8Js8/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rczoDdBarOOLuz4pWizP76TNnBXDQ/s96-c/photo.jpg" alt="person" />
+                    <p>userDetalils: {this.props.userLD}</p>
                 </div>
-    
+
             </div>
         );
     }
-   
-    
+
+
 }
 const mapStateToProps = state => {
-    return{
+    return {
         userLD: state.email
     };
 };

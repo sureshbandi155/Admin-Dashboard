@@ -110,7 +110,7 @@ class SignUp extends Component {
             } else if (validity.typeMismatch) {
                 error.textContent = `${label} should be a valid email address`;
             } else if (isPassword && validity.patternMismatch) {
-                error.textContent = `${label} should be longer than 4 chars`;
+                error.textContent = `${label} should be longer than 4 characters`;
             } else if (isPasswordConfirm && validity.customError) {
                 error.textContent = 'Passwords do not match';
             }
