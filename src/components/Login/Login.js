@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import classes from './Login.module.css';
 
 // import axios from 'axios';
@@ -80,16 +81,13 @@ class Login extends Component {
 
 
     };
-
-    redirectSignupHandler = () => {
-        this.props.history.push('/signup');
-    }
     responseGoogle = (response) => {
         this.setState({ google: response.profileObj, auth: true });
         console.log(this.state.google);
         this.props.history.push('/home');
     }
     responseGoogleFailure = () => {
+        // console.log('login auth failed');
         this.props.history.push('/login');
     }
     componentClicked = () => {
@@ -154,17 +152,18 @@ class Login extends Component {
     }
 
     render() {
+        // console.log(this.state);
         return (
             <div className="wrapper">
                 <div className={classes.loginContainer}>
                     <h1>Log in</h1>
                     <div className={classes.login}>
-                        <GoogleLogin
+                    <a href="/auth/google"><GoogleLogin
                             clientId="1002797710780-o39g3un6tukk7uk1v0p6omsjssu1u0u7.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
                             buttonText="LOGIN WITH GOOGLE"
                             onSuccess={this.responseGoogle}
                             onFailure={this.responseGoogleFailure}
-                        />
+                        /></a>
                         <FacebookLogin
                             appId="274007033579197"
                             autoLoad={false}
@@ -198,7 +197,7 @@ class Login extends Component {
                         </form>
                         <p>Forgot password?</p>
                         <p>Don’t have an account?
-                            <a onClick={this.redirectSignupHandler}>Sign up</a>
+                            <Link to="/signup">Sign up</Link>
                         </p>
                     </div>
 

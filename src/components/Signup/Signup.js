@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import classes from './Signup.module.css';
 
 import axios from "axios";
@@ -172,7 +173,7 @@ class SignUp extends Component {
                             </div>
                         </form>
                         <p>Click here to
-                            <a onClick={this.loginHandler}>Login</a>
+                            <Link to="/login">Login</Link>
                         </p>
 
                     </div>

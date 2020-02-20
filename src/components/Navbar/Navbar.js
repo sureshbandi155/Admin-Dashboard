@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+// import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faBell } from '@fortawesome/free-solid-svg-icons';
@@ -11,8 +12,8 @@ class Navbar extends Component {
     redirectHandler = () => {
         // this.props.history.push('/home');
     }
+   
     render() {
-
         return (
             <div className={classes.Navbar}>
                 <div>
@@ -23,9 +24,8 @@ class Navbar extends Component {
                     <FontAwesomeIcon icon={faEnvelope} />
                     <FontAwesomeIcon icon={faBell} />
                     <img src="https://lh5.googleusercontent.com/-gNAmwhr8Js8/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rczoDdBarOOLuz4pWizP76TNnBXDQ/s96-c/photo.jpg" alt="person" />
-                    <p>userDetalils: {this.props.userLD}</p>
+                    <p>USERNAME: {this.props.userEmail}</p>
                 </div>
-
             </div>
         );
     }
@@ -34,7 +34,7 @@ class Navbar extends Component {
 }
 const mapStateToProps = state => {
     return {
-        userLD: state.email
+        userEmail: state.email
     };
 };
 

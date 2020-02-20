@@ -40,15 +40,15 @@ export const auth = (email, password) => {
             password: password,
             returnSecureToken: true
         };
-        // let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=\n' +
-        //     'AIzaSyBn875LSrphDjICQ-OWqj15GKzCRwsp8qQ';
-        // if (!isSignup) {
-        //     url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBn875LSrphDjICQ-OWqj15GKzCRwsp8qQ';
-        // }
         axios.post('http://localhost:4000/login', authData)
             .then(response => {
                 console.log(response);
-                dispatch(authSuccess(response.config.data));
+                // var test = response.config.data.split();
+                var test = response.config.data; //string format
+                var test1 = JSON.parse(test); //convert string to object
+                // var userName = response.data; to get login user name
+                console.log(test1.email);
+                dispatch(authSuccess(test1.email));
                 // dispatch(push('/login'));
             })
             .catch(error => {
