@@ -3,16 +3,6 @@ import classes from './Signup.module.css';
 
 import axios from "axios";
 
-
-const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-const validateForm = (errors) => {
-    let valid = true;
-    Object.values(errors).forEach(
-        (val) => val.length > 0 && (valid = false)
-    );
-    return valid;
-}
-
 class SignUp extends Component {
     state = {
         formControls: {
@@ -29,12 +19,6 @@ class SignUp extends Component {
                 value: ''
             }
         },
-        errors: {
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        },
         loginUserDetails: '',
         errorPassword: '',
         signRes: ''
@@ -42,7 +26,8 @@ class SignUp extends Component {
     changeHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        let errors = this.state.errors;
+        event.target.classList.add('active');
+        this.showInputError(event.target);
         this.setState({
             formControls: {
                 ...this.state.formControls,
@@ -52,41 +37,10 @@ class SignUp extends Component {
                 }
             }
         });
-        switch (name) {
-            case 'name':
-                errors.name =
-                    value.length < 5
-                        ? 'Full Name must be 5 characters long!'
-                        : '';
-                break;
-            case 'email':
-                errors.email =
-                    validEmailRegex.test(value)
-                        ? ''
-                        : 'Email is not valid!';
-                break;
-            case 'password':
-                errors.password =
-                    value.length < 8
-                        ? 'Password must be 8 characters long!'
-                        : '';
-                break;
-            case 'confirmPassword':
-                errors.confirmPassword =
-                    value.length < 8
-                        ? 'Confirm password must be 8 characters long!'
-                        : '';
-                break;
-            default:
-                break;
-        }
-
-        this.setState({ errors, [name]: value });
-
     }
     submitHandler = (event) => {
         event.preventDefault();
-        // console.log(this.state.formControls);
+
         const formData = {};
         for (let formElementIdentifier in this.state.formControls) {
             formData[formElementIdentifier] = this.state.formControls[formElementIdentifier].value;
@@ -94,38 +48,80 @@ class SignUp extends Component {
         const data = {
             ...formData
         };
-        if (validateForm(this.state.errors)) {
-            console.info('Valid Form');
+        if (!this.showFormErrors()) {
+            console.log('Form is invalid: do not submit');
         } else {
-            console.error('Invalid Form')
-        }
-
-        if (this.state.formControls.password.value !== this.state.formControls.confirmPassword.value) {
-            this.setState({ errorPassword: 'Password not match' });
-            console.log(this.state.errorPassword);
-
-        }
-        else {
-            this.setState({ errorPassword: '' });
+            this.props.history.push('/login');
+            alert('Registration successful');
             axios.post('http://localhost:4000/signup', data)
                 .then(response => {
                     this.setState({ signRes: response.data });
-                    // console.log('data: ' + this.state.signRes);
-                    // this.props.history.push('/login');
-
+                    console.log('data: ' + this.state.signRes);
                 })
                 .catch(err => {
                     console.log(err);
                 });
+            console.log('Form is valid: submit');
         }
+
+
 
 
     };
     loginHandler = () => {
         this.props.history.push('/login');
     }
+
+    showFormErrors() {
+        const inputs = document.querySelectorAll('input');
+        let isFormValid = true;
+
+        inputs.forEach(input => {
+            input.classList.add('active');
+
+            const isInputValid = this.showInputError(input);
+
+            if (!isInputValid) {
+                isFormValid = false;
+            }
+        });
+
+        return isFormValid;
+    }
+    showInputError(input) {
+        const name = input.name;
+        const validity = input.validity;
+        const label = document.getElementById(`${name}Label`).textContent;
+        const error = document.getElementById(`${name}Error`);
+
+        const isPassword = name.indexOf('password') !== -1;
+        const isPasswordConfirm = name === 'confirmPassword';
+        if (isPasswordConfirm) {
+            if (this.password.value !== this.confirmPassword.value) {
+                this.confirmPassword.setCustomValidity('Passwords do not match');
+            } else {
+                this.confirmPassword.setCustomValidity('');
+            }
+        }
+
+        if (!validity.valid) {
+            if (validity.valueMissing) {
+                error.textContent = `${label} is a required field`;
+            } else if (validity.typeMismatch) {
+                error.textContent = `${label} should be a valid email address`;
+            } else if (isPassword && validity.patternMismatch) {
+                error.textContent = `${label} should be longer than 4 chars`;
+            } else if (isPasswordConfirm && validity.customError) {
+                error.textContent = 'Passwords do not match';
+            }
+            return false;
+        }
+
+        error.textContent = '';
+        return true;
+    }
+
     render() {
-        const { errors } = this.state;
         return (
             <div className="wrapper">
                 <div className={classes.signupContainer}>
@@ -133,51 +129,45 @@ class SignUp extends Component {
                     <div className={classes.signup}>
                         <form action="" onSubmit={this.submitHandler} noValidate>
                             <div className={classes.inputGroup}>
-                                <label>Full Name<span>*</span></label>
+                                <label id="nameLabel">Full Name</label><span>*</span>
                                 <input type="name" name="name"
-                                    placeholder="Enter Full Name" noValidate
+                                    placeholder="Enter Full Name"
                                     value={this.state.formControls.name.value}
-                                    onChange={this.changeHandler}
+                                    onChange={this.changeHandler} required
                                 />
-                                {errors.name.length > 0 &&
-                                    <p className={classes.error}>{errors.name}</p>}
+                                <div className={classes.error} id="nameError" />
                             </div>
                             <div className={classes.inputGroup}>
-                                <label>Email Address<span>*</span></label>
+                                <label id="emailLabel">Email Address</label><span>*</span>
                                 <input type="email" name="email"
                                     placeholder="name@gmail.com" noValidate
                                     value={this.state.formControls.email.value}
-                                    onChange={this.changeHandler}
+                                    onChange={this.changeHandler} required
                                 />
-                                {errors.email.length > 0 &&
-                                    <p className={classes.error}>{errors.email}</p>}
+                                <div className={classes.error} id="emailError" />
                             </div>
                             <div className={classes.inputGroup}>
-                                <label>Password<span>*</span></label>
+                                <label id="passwordLabel">Password</label><span>*</span>
                                 <input type="password" name="password"
-                                    placeholder="Password" noValidate
+                                    placeholder="Password"
+                                    ref={password => this.password = password}
                                     value={this.state.formControls.password.value}
-                                    onChange={this.changeHandler}
+                                    onChange={this.changeHandler} required pattern=".{5,}"
                                 />
-                                {errors.password.length > 0 &&
-                                    <p className={classes.error}>{errors.password}</p>}
+                                <div className={classes.error} id="passwordError" />
                             </div>
                             <div className={classes.inputGroup}>
-                                <label>Confirm Password<span>*</span></label>
+                                <label id="confirmPasswordLabel">Confirm Password</label><span>*</span>
                                 <input type="password" name="confirmPassword"
-                                    placeholder="Confirm Password" noValidate
+                                    placeholder="Confirm Password"
+                                    ref={confirmPassword => this.confirmPassword = confirmPassword}
                                     value={this.state.formControls.confirmPassword.value}
-                                    onChange={this.changeHandler}
+                                    onChange={this.changeHandler} required
                                 />
-                                {errors.confirmPassword.length > 0 &&
-                                    <p className={classes.error}>{errors.confirmPassword}</p>}
-                                {<p className={classes.error}>{this.state.errorPassword}</p>}
-
-
+                                <div className={classes.error} id="confirmPasswordError" />
                             </div>
                             <div>
-                                {<p className={classes.error}>{this.state.signRes}</p>}
-                                <input type="submit" value="Sign up" />
+                                <button className="btn btn-block btn-primary" type="submit" value="Sign up"> SignUp</button>
 
                             </div>
                         </form>

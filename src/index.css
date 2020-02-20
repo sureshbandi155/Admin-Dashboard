@@ -113,3 +113,13 @@ button[type="button"] span{
   font-size: 14px;
     font-weight: 500;
 }
+input.active:invalid {
+  border: 2px solid red;
+}
+input.active:valid {
+  border: 2px solid green;
+}
+button{
+  height: 50px !important;
+  margin-bottom: 24px !important;
+}

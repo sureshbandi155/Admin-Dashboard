@@ -2,20 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './Login.module.css';
 
-import axios from 'axios';
+// import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import * as actionTypes from '../../store/actions/index';
 
-
-const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-const validateForm = (errors) => {
-    let valid = true;
-    Object.values(errors).forEach(
-        (val) => val.length > 0 && (valid = false)
-    );
-    return valid;
-}
 
 class Login extends Component {
     state = {
@@ -28,10 +19,6 @@ class Login extends Component {
             }
         },
         loginUserDetails: '',
-        errors: {
-            email: '',
-            password: ''
-        },
         google: {
         },
         facebookLogin: {
@@ -44,8 +31,8 @@ class Login extends Component {
     changeHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        let errors = this.state.errors;
-
+        event.target.classList.add('active');
+        this.showInputError(event.target);
         this.setState({
             formControls: {
                 ...this.state.formControls,
@@ -56,40 +43,24 @@ class Login extends Component {
             }
         });
 
-        switch (name) {
-            case 'email':
-                errors.email =
-                    validEmailRegex.test(value)
-                        ? ''
-                        : 'Email is not valid!';
-                break;
-            case 'password':
-                errors.password =
-                    value.length < 8
-                        ? 'Password must be 8 characters long!'
-                        : '';
-                break;
-            default:
-                break;
-        }
-        this.setState({ errors, [name]: value });
-
-    }
+    };
     submitHandler = (event) => {
         event.preventDefault();
         const formData = {};
         for (let formElementIdentifier in this.state.formControls) {
             formData[formElementIdentifier] = this.state.formControls[formElementIdentifier].value;
         }
-        const data = {
-            ...formData
-        };
-        this.props.onAuth(this.state.formControls.email.value, this.state.formControls.password.value);
+        // const data = {
+        //     ...formData
+        // };
+        
 
-        if (validateForm(this.state.errors)) {
-            console.info('Valid Form');
+        if (!this.showFormErrors()) {
+            console.log('Form is invalid: do not Login');
         } else {
-            console.error('Invalid Form')
+            this.props.onAuth(this.state.formControls.email.value, this.state.formControls.password.value);
+            console.log('Form is valid: check serverside validation');
+            this.props.history.push('/home');
         }
         // console.log(this.state.loginUserDetails);
         // if (this.state.loginUserDetails.data === "Login successfully done.") {
@@ -135,10 +106,54 @@ class Login extends Component {
         this.props.history.push('/home');
     }
 
+
+    showFormErrors() {
+        const inputs = document.querySelectorAll('input');
+        let isFormValid = true;
+
+        inputs.forEach(input => {
+            input.classList.add('active');
+
+            const isInputValid = this.showInputError(input);
+
+            if (!isInputValid) {
+                isFormValid = false;
+            }
+        });
+
+        return isFormValid;
+    }
+    showInputError(input) {
+        const name = input.name;
+        const validity = input.validity;
+        const label = document.getElementById(`${name}Label`).textContent;
+        const error = document.getElementById(`${name}Error`);
+        const isPassword = name.indexOf('password') !== -1;
+        const isPasswordConfirm = name === 'confirmPassword';
+        if (isPasswordConfirm) {
+            if (this.password.value !== this.confirmPassword.value) {
+                this.confirmPassword.setCustomValidity('Passwords do not match');
+            } else {
+                this.confirmPassword.setCustomValidity('');
+            }
+        }
+
+        if (!validity.valid) {
+            if (validity.valueMissing) {
+                error.textContent = `${label} is a required field`;
+            } else if (validity.typeMismatch) {
+                error.textContent = `${label} should be a valid email address`;
+            } else if (isPassword && validity.patternMismatch) {
+                error.textContent = `${label} should be longer than 4 chars`;
+            }
+            return false;
+        }
+
+        error.textContent = '';
+        return true;
+    }
+
     render() {
-        // console.log(this.state);
-        const { errors } = this.state;
-        // console.log(data);
         return (
             <div className="wrapper">
                 <div className={classes.loginContainer}>
@@ -155,38 +170,36 @@ class Login extends Component {
                             autoLoad={false}
                             fields="name,email,picture"
                             onClick={this.componentClicked}
-                            callback={this.responseFacebook}  onFailure={this.responseGoogleFailure}/>
-                        <form action="" onSubmit={this.submitHandler}>
+                            callback={this.responseFacebook} onFailure={this.responseGoogleFailure} />
+                        <form action="" onSubmit={this.submitHandler} noValidate>
                             <div className={classes.inputGroup}>
-                                <label>Email Address</label>
+                                <label id="emailLabel">Email Address</label>
                                 <input type="email"
                                     name="email"
-                                    placeholder="name@gmail.com"
+                                    placeholder="name@gmail.com" required
                                     value={this.state.formControls.email.value}
-                                    onChange={this.changeHandler} noValidate />
-                                {errors.email.length > 0 &&
-                                    <span className={classes.error}>{errors.email}</span>}
+                                    onChange={this.changeHandler} />
+                                <div className={classes.error} id="emailError" />
                             </div>
                             <div className={classes.inputGroup}>
-                                <label>Password</label>
+                                <label id="passwordLabel">Password</label>
                                 <input type="password"
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder="Password" 
+                                    ref={password => this.password = password}
+                                    required pattern=".{5,}"
                                     value={this.state.formControls.password.value}
-                                    onChange={this.changeHandler} noValidate />
-                                {errors.password.length > 0 &&
-                                    <span className={classes.error}>{errors.password}</span>}
+                                    onChange={this.changeHandler} />
+                                <div className={classes.error} id="passwordError" />
                             </div>
                             <div>
-                                {/* {<span className={classes.error}>{this.state.loginUserDetails}</span>} */}
-                                <input type="submit" value="Log In" />
+                                <button className="btn btn-primary btn-block" type="submit">Log In</button>
                             </div>
                         </form>
                         <p>Forgot password?</p>
                         <p>Don’t have an account?
-                            <a href="#" onClick={this.redirectSignupHandler}>Sign up</a>
+                            <a onClick={this.redirectSignupHandler}>Sign up</a>
                         </p>
-                        {/* <p onClick={this.redirectSignupHandler}>Sign up</p> */}
                     </div>
 
                 </div>
@@ -196,8 +209,8 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return{
-      onAuth: (email, password) => dispatch(actionTypes.auth(email, password))
-  };
+    return {
+        onAuth: (email, password) => dispatch(actionTypes.auth(email, password))
+    };
 };
 export default connect(null, mapDispatchToProps)(Login);

@@ -11,7 +11,7 @@
     max-width: 676px;
     
 }
-.signupContainer label span{
+.signupContainer  span{
     color: red;
     vertical-align: middle;
     margin-left: 3px;
@@ -28,6 +28,10 @@
 }
 .inputGroup{
 margin-bottom: 24px;
+}
+.error{
+    color: red;
+    padding-top: 5px;
 }
 .signupContainer p a{
     text-decoration: none;
