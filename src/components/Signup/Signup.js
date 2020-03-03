@@ -168,7 +168,7 @@ class SignUp extends Component {
                                 <div className={classes.error} id="confirmPasswordError" />
                             </div>
                             <div>
-                                <button className="btn btn-block btn-primary" type="submit" value="Sign up"> SignUp</button>
+                                <button className="btn btn-block btn-primary" type="submit" value="Sign up"> Sign Up</button>
 
                             </div>
                         </form>
