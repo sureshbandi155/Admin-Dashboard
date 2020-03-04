@@ -158,13 +158,12 @@ class Login extends Component {
                 <div className={classes.loginContainer}>
                     <h1>Log in</h1>
                     <div className={classes.login}>
-                     {/* <a href="/auth/google">
                         <GoogleLogin
                             clientId="1002797710780-o39g3un6tukk7uk1v0p6omsjssu1u0u7.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
                             buttonText="LOGIN WITH GOOGLE"
                             onSuccess={this.responseGoogle}
                             onFailure={this.responseGoogleFailure}
-                        /></a> */}
+                        />
                         {/* <a className="google-btn" href="/auth/google">Google+</a> */}
                         <Link to="/auth/google" className="google-btn">Google+</Link>
                         <FacebookLogin

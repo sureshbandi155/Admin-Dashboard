@@ -34,7 +34,6 @@ class App extends Component {
     return body;
   };
   render() {
-    console.log(this.state.data);
     return (
       <BrowserRouter>
         {/* <Header /> */}
